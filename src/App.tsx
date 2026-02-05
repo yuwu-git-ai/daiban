@@ -308,7 +308,7 @@ function App() {
   };
 
   const deleteCompleted = async () => {
-    const completedIds = todos.filter(t => t.completed).map(t => t.id);
+    const completedIds = todos.filter(t => t.completed && !t.parent_id).map(t => t.id);
     if (completedIds.length === 0) return;
 
     try {
@@ -318,7 +318,7 @@ function App() {
         .in('id', completedIds);
 
       if (error) throw error;
-      setTodos(todos.filter(t => !t.completed));
+      setTodos(todos.filter(t => !completedIds.includes(t.id)));
     } catch (error) {
       console.error('Error deleting completed todos:', error);
     }
@@ -483,6 +483,7 @@ function App() {
                 添加分类
               </button>
             </div>
+
             <form onSubmit={addTodo} className="mb-8">
               <div className="flex gap-3">
                 <input
@@ -872,7 +873,8 @@ function App() {
           </div>
         )}
       </div>
-    );
-  }
+    </div>
+  );
+}
 
 export default App;
