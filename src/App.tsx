@@ -843,7 +843,7 @@ function App() {
                           newCategoryColor === color ? 'ring-4 ring-offset-2 ring-gray-300 scale-110' : ''
                         }`}
                         style={{ backgroundColor: color }}
-                      />
+                      ></button>
                     ))}
                   </div>
                 </div>
