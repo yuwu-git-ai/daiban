@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的简洁待办清单</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 今日待办</h1>
+            <p>简洁高效，专注当下</p>
+        </header>
+
+        <main>
+            <div class="input-area">
+                <input type="text" id="taskInput" placeholder="输入新任务，按回车添加..." maxlength="50">
+                <button id="addBtn">添加</button>
+            </div>
+
+            <ul id="taskList">
+                <!-- 任务列表将在这里由JavaScript动态生成 -->
+                <!-- 示例任务： <li><span>买牛奶</span><button class="delete">×</button></li> -->
+            </ul>
+
+            <div class="stats">
+                总计：<span id="totalCount">0</span> | 
+                剩余：<span id="remainingCount">0</span>
+            </div>
+
+            <div class="backup-area">
+                <button id="exportBtn">📤 导出备份</button>
+                <label for="importFile" class="import-label">
+                    <input type="file" id="importFile" accept=".json" hidden>
+                    📥 导入备份
+                </label>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
