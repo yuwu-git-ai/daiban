@@ -1,0 +1,329 @@
+/* 基础重置与字体 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* 主容器 */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* 标题区域 */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    color: #2d3436;
+}
+
+header p {
+    color: #636e72;
+    font-size: 1rem;
+}
+
+/* 输入区域 */
+.input-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+#taskInput {
+    flex: 1;
+    padding: 16px 20px;
+    border: 2px solid #dfe6e9;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+#taskInput:focus {
+    outline: none;
+    border-color: #74b9ff;
+}
+
+#addBtn {
+    padding: 16px 28px;
+    background-color: #0984e3;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#addBtn:hover {
+    background-color: #0770c4;
+}
+
+/* 任务列表 */
+#taskList {
+    list-style: none;
+    margin-bottom: 25px;
+    padding-left: 0;
+}
+
+/* 每个任务项 - 初始状态 */
+#taskList li {
+    display: flex;
+    flex-direction: column; /* 改为纵向排列，让任务信息和操作按钮在文本下方 */
+    align-items: stretch;
+    padding: 18px 20px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    border-left: 5px solid #dfe6e9;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* 任务项 - 已完成状态 */
+#taskList li.done {
+    background-color: #f1f2f6;
+    border-left-color: #00b894;
+}
+
+#taskList li.done span {
+    text-decoration: line-through;
+    color: #888;
+}
+
+/* 任务文本 */
+#taskList li span {
+    font-size: 1.1rem;
+    cursor: pointer;
+    flex: 1;
+    word-break: break-word;
+}
+/* 任务文本与删除按钮容器 */
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* 顶部对齐，防止图标和文字不对齐 */
+    width: 100%;
+}
+
+/* 删除按钮 */
+#taskList li .delete {
+    background: none;
+    border: none;
+    color: #ff7675;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 8px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+#taskList li .delete:hover {
+    opacity: 1;
+}
+
+/* 子任务列表样式 */
+.subtask-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 10px 0 0 0;
+}
+
+/* 子任务视觉样式 */
+#taskList li.subtask {
+    border-left-color: #ffb74d;
+    background-color: #fff8e1;
+}
+
+/* 树形结构连接线样式优化 */
+#taskList li:not(:first-child)::before {
+    content: '';
+    position: absolute;
+    left: -25px;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #ddd;
+}
+
+#taskList li::after {
+    content: '';
+    position: absolute;
+    left: -25px;
+    top: 20px;
+    width: 23px;
+    height: 2px;
+    background-color: #ddd;
+}
+
+#taskList li:first-child::before {
+    top: 20px;
+    height: calc(100% - 20px);
+}
+
+/* 统计区域 */
+.stats {
+    text-align: center;
+    color: #636e72;
+    font-size: 0.95rem;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* 手机端微调 */
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+    .container {
+        padding: 25px 20px;
+    }
+    .input-area {
+        flex-direction: column;
+    }
+    #addBtn {
+        width: 100%;
+    }
+    
+    /* 树形结构在手机端的调整 */
+    #taskList li {
+        margin-left: 0 !important;
+        padding-left: 15px !important;
+    }
+    
+    #taskList li::before,
+    #taskList li::after {
+        display: none;
+    }
+    
+    .input-options {
+        flex-direction: column;
+    }
+    
+    .input-options select,
+    .input-options input[type="date"] {
+        width: 100%;
+    }
+}
+/* 备份区域样式 */
+.backup-area {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+#exportBtn,
+.import-label {
+    padding: 12px 24px;
+    background-color: #f1f2f6;
+    border: 2px dashed #a4b0be;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: #2d3436;
+    transition: all 0.3s;
+}
+
+#exportBtn:hover,
+.import-label:hover {
+    background-color: #dfe6e9;
+    border-color: #74b9ff;
+}
+/* 新输入选项行的样式 */
+.input-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+.input-options select,
+.input-options input[type="date"] {
+    padding: 10px 15px;
+    border: 1px solid #dfe6e9;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: white;
+    color: #2d3436;
+}
+.input-options select:focus,
+.input-options input[type="date"]:focus {
+    outline: none;
+    border-color: #74b9ff;
+}
+/* 子任务控制区域样式 */
+.subtask-control {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #dfe6e9;
+}
+#addSubBtn {
+    padding: 10px 20px;
+    background-color: #00b894;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+#addSubBtn:disabled {
+    background-color: #b2bec3;
+    cursor: not-allowed;
+}
+#addSubBtn:not(:disabled):hover {
+    background-color: #00a085;
+}
+#parentTaskInfo {
+    font-size: 0.9rem;
+    color: #636e72;
+    font-style: italic;
+}
+/* 任务信息样式 */
+.task-info {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+    flex-wrap: wrap; /* 允许在小空间内换行 */
+    flex: 1; /* 【关键修改】占据剩余空间 */
+    /* 删除或注释掉 width: 100%; */
+}
+.task-info small {
+    background-color: #e3f2fd;
+    padding: 3px 8px;
+    border-radius: 10px;
+    color: #1976d2;
+    font-size: 0.8rem;
+    white-space: nowrap; /* 防止单个标签内文字换行 */
+}
+/* 子任务视觉样式 */
+#taskList li.subtask {
+    border-left-color: #ffb74d; /* 用不同的左边框颜色区分子任务 */
+    background-color: #fff8e1;
+}
